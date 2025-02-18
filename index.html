@@ -58,6 +58,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 5%;
+      position: relative;
     }
     .logo-container {
       display: flex;
@@ -72,18 +73,36 @@
       font-weight: bold;
       color: var(--branco);
     }
-    header nav ul {
+    /* Menu horizontal (desktop) */
+    nav ul {
       list-style: none;
       display: flex;
       gap: 20px;
     }
-    header nav ul li a {
+    nav ul li a {
       color: var(--branco);
       font-weight: 500;
       transition: color 0.3s;
     }
-    header nav ul li a:hover {
+    nav ul li a:hover {
       color: #999;
+    }
+
+    /* Ícone hamburger (aparece só em telas menores) */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      background-color: var(--preto);
+      padding: 8px;
+      border-radius: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 4px 0;
+      background-color: var(--verde-principal);
+      transition: 0.3s;
     }
 
     /* ===========================
@@ -110,7 +129,6 @@
       max-width: 600px;
       margin: 0 auto;
     }
-    /* Seta para rolar do banner até a primeira seção */
     .scroll-down {
       position: absolute;
       bottom: 10px;
@@ -185,24 +203,16 @@
     }
 
     /* ===========================
-       EMPRESA (fundo branco)
+       SEÇÕES EXEMPLO
        =========================== */
     .empresa {
       background-color: var(--branco);
       color: var(--texto-preto);
     }
-
-    /* ===========================
-       TECNOLOGIA (fundo #222)
-       =========================== */
     .tecnologia {
       background-color: var(--cinza-escuro);
       color: var(--branco);
     }
-
-    /* ===========================
-       CLIENTES (fundo branco)
-       =========================== */
     .clientes {
       background-color: var(--branco);
       color: var(--texto-preto);
@@ -237,9 +247,6 @@
       transform: scale(1.05);
     }
 
-    /* ===========================
-       ESTATÍSTICAS (fundo preto)
-       =========================== */
     .stats {
       background-color: var(--preto);
       color: var(--branco);
@@ -269,7 +276,6 @@
       margin-bottom: 10px;
       position: relative;
     }
-    /* Sublinhado verde abaixo do número */
     .stat-item .count::after {
       content: "";
       width: 40px;
@@ -286,9 +292,6 @@
       margin-top: 15px;
     }
 
-    /* ===========================
-       OBRAS (fundo branco)
-       =========================== */
     .obras {
       background-color: var(--branco);
       color: var(--texto-preto);
@@ -342,25 +345,16 @@
       line-height: 1.4;
     }
 
-    /* ===========================
-       ISO (fundo verde)
-       =========================== */
     .iso-section {
       background-color: var(--verde-principal);
       color: var(--branco);
     }
 
-    /* ===========================
-       COMPLIANCE (fundo #333)
-       =========================== */
     .compliance-section {
       background-color: #333;
       color: var(--branco);
     }
 
-    /* ===========================
-       RODAPÉ (FUNDO PRETO)
-       =========================== */
     footer {
       width: 100%;
       background-color: var(--preto);
@@ -415,10 +409,28 @@
 
     /* ===========================
        RESPONSIVO EXTRA (max-width: 768px)
-       Para celular
        =========================== */
     @media (max-width: 768px) {
-      /* Ajuste banner */
+      /* Menu Hamburger: Esconde o menu horizontal */
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: var(--preto);
+        padding: 20px;
+        border-radius: 0 0 0 8px;
+        flex-direction: column;
+        gap: 15px;
+        z-index: 998;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+      /* Ajuste do banner */
       .banner {
         height: auto;
         padding: 40px 5%;
@@ -430,13 +442,6 @@
       .banner p {
         font-size: 1em;
       }
-
-      /* Menu em coluna */
-      header nav ul {
-        flex-direction: column;
-        gap: 10px;
-      }
-
       /* Seções com vídeo empilham texto e vídeo */
       .section-container {
         flex-direction: column;
@@ -445,7 +450,6 @@
       .section-video, .section-text {
         width: 100%;
       }
-
       /* Stats, clientes, obras em coluna */
       .stats-container {
         flex-direction: column;
@@ -462,7 +466,6 @@
         width: 100%;
         max-width: 400px;
       }
-
       /* Rodapé logos empilhadas */
       .footer-logos {
         flex-direction: column;
@@ -474,13 +477,20 @@
 <body>
 
   <!-- ===========================
-       CABEÇALHO (PRETO)
+       CABEÇALHO (PRETO) COM MENU HAMBURGER
        =========================== -->
   <header>
     <div class="logo-container">
       <img src="Engenharia.png" alt="Logo Ambito Engenharia">
       <span>Ambito Engenharia</span>
     </div>
+    <!-- Ícone Hamburger (aparece em telas pequenas) -->
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <!-- Menu Horizontal -->
     <nav>
       <ul>
         <li><a href="#empresa">Empresa</a></li>
@@ -518,7 +528,7 @@
   </div>
 
   <!-- ===========================
-       EMPRESA (1º VÍDEO)
+       EMPRESA (1º VÍDEO – LADO ESQUERDO, invertido com .reverse)
        =========================== -->
   <section id="empresa" class="empresa reverse">
     <div class="section-container">
@@ -531,9 +541,7 @@
       <div class="section-text">
         <h2>Empresa</h2>
         <p>
-          A Ambito Engenharia atua há mais de 20 anos no mercado, oferecendo soluções em construção civil e
-          incorporação com foco em qualidade, sustentabilidade e inovação. Atendemos clientes em
-          todo o território nacional, entregando obras de grande porte e alta complexidade.
+          A Ambito Engenharia atua há mais de 20 anos no mercado, oferecendo soluções em construção civil e incorporação com foco em qualidade, sustentabilidade e inovação. Atendemos clientes em todo o território nacional, entregando obras de grande porte e alta complexidade.
         </p>
       </div>
     </div>
@@ -547,16 +555,14 @@
   </div>
 
   <!-- ===========================
-       TECNOLOGIA (2º VÍDEO)
+       TECNOLOGIA (2º VÍDEO – LADO DIREITO)
        =========================== -->
   <section id="tecnologia" class="tecnologia">
     <div class="section-container">
       <div class="section-text">
         <h2>Tecnologia</h2>
         <p>
-          Contamos com uma equipe especializada, que utiliza métodos modernos de construção,
-          automação e gerenciamento de projetos. Investimos continuamente em pesquisa
-          e desenvolvimento para garantir a melhor performance em cada obra.
+          Contamos com uma equipe especializada que utiliza métodos modernos de construção, automação e gerenciamento de projetos. Investimos continuamente em pesquisa e desenvolvimento para garantir a melhor performance em cada obra.
         </p>
       </div>
       <div class="section-video">
@@ -576,13 +582,12 @@
   </div>
 
   <!-- ===========================
-       CLIENTES (Fundo Branco)
+       CLIENTES (Fundo Branco – Estilo da imagem de referência)
        =========================== -->
   <section id="clientes" class="clientes">
     <h2>Nossos Clientes</h2>
     <p>
-      A Ambito Engenharia dispõe uma reputação inigualável por sua conduta ética,
-      compromisso ao orçamento, cronograma e satisfação do cliente.
+      A Ambito Engenharia dispõe de uma reputação inigualável por sua conduta ética, compromisso com orçamento, cronograma e satisfação do cliente.
     </p>
     <div class="cliente-logos">
       <img src="https://via.placeholder.com/120x60?text=Cliente1" alt="Cliente 1">
@@ -601,7 +606,7 @@
   </div>
 
   <!-- ===========================
-       ESTATÍSTICAS (Fundo preto)
+       ESTATÍSTICAS (Fundo Preto, Contagem)
        =========================== -->
   <section id="stats" class="stats">
     <h2>Estatísticas</h2>
@@ -638,9 +643,7 @@
   <section id="obras" class="obras">
     <h2>Últimas Obras</h2>
     <p>
-      O longo histórico de serviços de engenharia e construção
-      confirma a história da empresa que prima pela excelência em suas relações
-      comerciais e execução de serviços.
+      O longo histórico de serviços de engenharia e construção confirma a história da empresa que prima pela excelência em suas relações comerciais e execução de serviços.
       <br><br>
       <strong>+ de 170 obras em todo território nacional</strong>
     </p>
@@ -677,7 +680,7 @@
   </div>
 
   <!-- ===========================
-       ISO (Fundo verde, 3º VÍDEO)
+       ISO (Fundo Verde, 3º VÍDEO – LADO ESQUERDO, invertido)
        =========================== -->
   <section id="iso" class="iso-section reverse">
     <div class="section-container">
@@ -690,9 +693,7 @@
       <div class="section-text">
         <h2>ISO</h2>
         <p>
-          Inovação e responsabilidade ambiental caminham juntas para garantir o sucesso
-          do seu negócio e o cuidado com o meio ambiente. A Ambito Engenharia segue
-          os mais rigorosos padrões de qualidade e segurança.
+          Inovação e responsabilidade ambiental caminham juntas para garantir o sucesso do seu negócio e o cuidado com o meio ambiente. A Ambito Engenharia segue os mais rigorosos padrões de qualidade e segurança.
         </p>
       </div>
     </div>
@@ -706,17 +707,14 @@
   </div>
 
   <!-- ===========================
-       COMPLIANCE (Fundo #333, 4º VÍDEO sem autoplay)
+       COMPLIANCE (Fundo #333, 4º VÍDEO – LADO DIREITO, sem autoplay)
        =========================== -->
   <section id="compliance" class="compliance-section">
     <div class="section-container">
       <div class="section-text">
         <h2>Compliance</h2>
         <p>
-          A Ambito Engenharia preza pela ética, transparência e cumprimento de todas as normas
-          legais. Nosso canal de compliance e ética está disponível para funcionários,
-          clientes e fornecedores. Garantimos que todos os processos sejam conduzidos
-          com integridade e respeito.
+          A Ambito Engenharia preza pela ética, transparência e cumprimento de todas as normas legais. Nosso canal de compliance e ética está disponível para funcionários, clientes e fornecedores. Garantimos que todos os processos sejam conduzidos com integridade e respeito.
         </p>
         <p><strong>Canal de Ética:</strong> <a href="#" style="color: var(--verde-principal);">Acesse aqui</a></p>
         <p><em>Este vídeo só inicia ao clicar:</em></p>
@@ -761,6 +759,12 @@
       document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     }
 
+    // Toggle do menu hamburger
+    function toggleMenu() {
+      const navUl = document.querySelector('header nav ul');
+      navUl.classList.toggle('active');
+    }
+
     // Mostrar/esconder o botão "Voltar ao Topo"
     window.addEventListener('scroll', function() {
       const btn = document.getElementById('backToTop');
@@ -785,7 +789,6 @@
 
     function animateCountUp(el, target) {
       let current = 0;
-      // Ajuste o incremento conforme seu gosto
       const increment = target < 50 ? 1 : Math.floor(target / 50);
       const timer = setInterval(() => {
         current += increment;
@@ -797,7 +800,6 @@
       }, 50);
     }
 
-    // Observa quando a seção de stats entra na tela
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !statsStarted) {
@@ -812,7 +814,7 @@
 
     observer.observe(statSection);
 
-    console.log("Página carregada com layout zig-zag, seção de clientes, e responsividade para celular!");
+    console.log("Página carregada com menu hamburger responsivo!");
   </script>
 </body>
 </html>
