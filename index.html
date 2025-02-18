@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ambito Engenharia</title>
+
+  <!-- Fonte moderna (opcional) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===========================
+       VARIÁVEIS DE COR
+       =========================== */
+    :root {
+      --verde-principal: #2E7D32;
+      --verde-escuro: #1B5E20;
+      --branco: #fff;
+      --preto: #000;
+      --cinza-escuro: #222;
+      --cinza-claro: #f8f8f8;
+      --texto-preto: #333;
+      --texto-cinza: #555;
+    }
+
+    /* ===========================
+       RESET E CONFIGURAÇÕES GLOBAIS
+       =========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      line-height: 1.6;
+      background-color: var(--branco);
+      color: var(--texto-preto);
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    h1, h2, h3 {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ===========================
+       CABEÇALHO (header)
+       FUNDO PRETO
+       =========================== */
+    header {
+      width: 100%;
+      background-color: var(--preto);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 5%;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-container img {
+      height: 50px;
+    }
+    .logo-container span {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: var(--branco);
+    }
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    header nav ul li a {
+      color: var(--branco);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    header nav ul li a:hover {
+      color: #999;
+    }
+
+    /* ===========================
+       BANNER (imagem de fundo)
+       =========================== */
+    .banner {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      background: url("https://via.placeholder.com/1920x300") no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--branco);
+    }
+    .banner h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+    .banner p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    /* Seta para rolar do banner até a primeira seção */
+    .scroll-down {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: pointer;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, 10px); }
+      60% { transform: translate(-50%, 5px); }
+    }
+
+    /* ===========================
+       DIVISORES (SVG)
+       =========================== */
+    .divider {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .divider svg {
+      display: block;
+      width: 100%;
+      height: 50px;
+    }
+
+    /* ===========================
+       SEÇÕES EM ZIG-ZAG (texto + vídeo)
+       =========================== */
+    .section-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 5%;
+    }
+    .section-text {
+      flex: 1 1 400px;
+      min-width: 280px;
+    }
+    .section-video {
+      flex: 1 1 400px;
+      min-width: 280px;
+      display: flex;
+      justify-content: center;
+    }
+    .section-video video {
+      width: 100%;
+      max-width: 500px;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: #000;
+    }
+    .section-text h2 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+    .section-text p {
+      font-size: 1em;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    /* Inverte a ordem texto-vídeo */
+    .reverse .section-container {
+      flex-direction: row-reverse;
+    }
+
+    /* ===========================
+       EMPRESA (fundo branco)
+       1º VÍDEO (esquerda)
+       =========================== */
+    .empresa {
+      background-color: var(--branco);
+      color: var(--texto-preto);
+    }
+
+    /* ===========================
+       TECNOLOGIA (fundo #222)
+       2º VÍDEO (direita)
+       =========================== */
+    .tecnologia {
+      background-color: var(--cinza-escuro);
+      color: var(--branco);
+    }
+
+    /* ===========================
+       CLIENTES (fundo branco)
+       SEM VÍDEO, estilo da imagem
+       =========================== */
+    .clientes {
+      background-color: var(--branco);
+      color: var(--texto-preto);
+      text-align: center;
+      padding: 60px 5%;
+    }
+    .clientes h2 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+    .clientes p {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.5;
+      color: var(--texto-cinza);
+    }
+    .cliente-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      align-items: center;
+    }
+    .cliente-logos img {
+      max-width: 120px;
+      height: auto;
+      filter: grayscale(100%);
+      transition: filter 0.3s, transform 0.3s;
+    }
+    .cliente-logos img:hover {
+      filter: grayscale(0);
+      transform: scale(1.05);
+    }
+
+    /* ===========================
+       ESTATÍSTICAS (fundo preto)
+       SEM VÍDEO, contagem
+       =========================== */
+    .stats {
+      background-color: var(--preto);
+      color: var(--branco);
+      padding: 60px 5%;
+      text-align: center;
+    }
+    .stats h2 {
+      font-size: 1.8em;
+      margin-bottom: 30px;
+    }
+    .stats-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .stat-item {
+      flex: 1 1 200px;
+      min-width: 150px;
+    }
+    .stat-item .count {
+      display: block;
+      font-size: 2.5em;
+      font-weight: 600;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    /* Sublinhado verde abaixo do número */
+    .stat-item .count::after {
+      content: "";
+      width: 40px;
+      height: 2px;
+      background-color: var(--verde-principal);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -5px;
+    }
+    .stat-item p {
+      font-size: 0.95em;
+      color: #ccc;
+      margin-top: 15px;
+    }
+
+    /* ===========================
+       OBRAS (fundo branco)
+       SEM VÍDEO
+       =========================== */
+    .obras {
+      background-color: var(--branco);
+      color: var(--texto-preto);
+      padding: 60px 5%;
+      text-align: center;
+    }
+    .obras h2 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+    .obras p {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.5;
+      color: var(--texto-cinza);
+    }
+    .obras-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .obra-item {
+      width: 300px;
+      overflow: hidden;
+      text-align: left;
+      background-color: #fefefe;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      transition: transform 0.2s;
+    }
+    .obra-item:hover {
+      transform: scale(1.02);
+    }
+    .obra-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .obra-info {
+      padding: 15px;
+    }
+    .obra-info h3 {
+      font-size: 1.1em;
+      margin-bottom: 5px;
+      color: var(--preto);
+    }
+    .obra-info p {
+      font-size: 0.9em;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* ===========================
+       ISO (fundo verde)
+       3º VÍDEO (esquerda)
+       =========================== */
+    .iso-section {
+      background-color: var(--verde-principal);
+      color: var(--branco);
+    }
+
+    /* ===========================
+       COMPLIANCE (fundo #333)
+       4º VÍDEO (direita)
+       =========================== */
+    .compliance-section {
+      background-color: #333;
+      color: var(--branco);
+    }
+
+    /* ===========================
+       RODAPÉ (fundo preto)
+       =========================== */
+    footer {
+      width: 100%;
+      background-color: var(--preto);
+      color: var(--branco);
+      text-align: center;
+      padding: 20px 5%;
+    }
+    .footer-logos {
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .footer-logos img {
+      max-width: 120px;
+      height: auto;
+      filter: grayscale(100%);
+      transition: filter 0.3s, transform 0.3s;
+    }
+    .footer-logos img:hover {
+      filter: grayscale(0);
+      transform: scale(1.05);
+    }
+    footer p {
+      margin: 5px 0;
+      font-size: 0.9em;
+    }
+
+    /* ===========================
+       BOTÃO "VOLTAR AO TOPO"
+       =========================== */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--verde-principal);
+      color: var(--branco);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s;
+      z-index: 999;
+    }
+    #backToTop:hover {
+      background-color: var(--verde-escuro);
+    }
+
+    /* ===========================
+       RESPONSIVO
+       =========================== */
+    @media (max-width: 768px) {
+      .banner {
+        height: 200px;
+      }
+      .banner h1 {
+        font-size: 1.5em;
+      }
+      .section-container {
+        padding: 20px;
+      }
+      .obra-item {
+        width: 100%;
+        max-width: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===========================
+       CABEÇALHO (PRETO)
+       =========================== -->
+  <header>
+    <div class="logo-container">
+      <img src="Engenharia.png" alt="Logo Ambito Engenharia">
+      <span>Ambito Engenharia</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#empresa">Empresa</a></li>
+        <li><a href="#tecnologia">Tecnologia</a></li>
+        <li><a href="#clientes">Clientes</a></li>
+        <li><a href="#stats">Estatísticas</a></li>
+        <li><a href="#obras">Obras</a></li>
+        <li><a href="#iso">ISO</a></li>
+        <li><a href="#compliance">Compliance</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===========================
+       BANNER (IMAGEM DE FUNDO)
+       =========================== -->
+  <section class="banner">
+    <div>
+      <h1>Bem-vindo(a) à Ambito Engenharia</h1>
+      <p>Soluções em engenharia, tecnologia e inovação com foco em responsabilidade ambiental.</p>
+    </div>
+    <!-- Seta para rolar até a seção "empresa" -->
+    <div class="scroll-down" onclick="scrollToSection('empresa')">
+      <svg width="24" height="24" fill="var(--verde-principal)" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 16.5l-8-8 1.41-1.42L12 13.67l6.59-6.59L20 8.5z"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- DIVISOR (banner -> empresa) -->
+  <div class="divider">
+    <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
+      <path d="M0,0 C600,50 600,50 1200,0 L1200,50 L0,50 Z" fill="#fff"></path>
+    </svg>
+  </div>
+
+  <!-- ===========================
+       EMPRESA (1º VÍDEO À ESQUERDA)
+       =========================== -->
+  <section id="empresa" class="empresa reverse">
+    <div class="section-container">
+      <!-- Vídeo à esquerda, texto à direita -->
+      <div class="section-video">
+        <video autoplay muted loop>
+          <source src="video1.mp4" type="video/mp4">
+          Seu navegador não suporta o vídeo HTML5.
+        </video>
+      </div>
+      <div class="section-text">
+        <h2>Empresa</h2>
+        <p>
+          A Ambito Engenharia atua há mais de 20 anos no mercado, oferecendo soluções em construção civil e
+          incorporação com foco em qualidade, sustentabilidade e inovação. Atendemos clientes em
+          todo o território nacional, entregando obras de grande porte e alta complexidade.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVISOR (empresa -> tecnologia) -->
+  <div class="divider">
+    <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
+      <path d="M0,0 C600,50 600,50 1200,0 L1200,50 L0,50 Z" fill="#222"></path>
+    </svg>
+  </div>
+
+  <!-- ===========================
+       TECNOLOGIA (2º VÍDEO À DIREITA)
+       =========================== -->
+  <section id="tecnologia" class="tecnologia">
+    <div class="section-container">
+      <div class="section-text">
+        <h2>Tecnologia</h2>
+        <p>
+          Contamos com uma equipe especializada, que utiliza métodos modernos de construção,
+          automação e gerenciamento de projetos. Investimos continuamente em pesquisa
+          e desenvolvimento para garantir a melhor performance em cada obra.
+        </p>
+      </div>
+      <div class="section-video">
+        <video autoplay muted loop>
+          <source src="video2.mp4" type="video/mp4">
+          Seu navegador não suporta o vídeo HTML5.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVISOR (tecnologia -> clientes) -->
+  <div class="divider">
+    <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
+      <path d="M0,0 C600,50 600,50 1200,0 L1200,50 L0,50 Z" fill="#fff"></path>
+    </svg>
+  </div>
+
+  <!-- ===========================
+       CLIENTES (Fundo Branco, sem vídeo)
+       =========================== -->
+  <section id="clientes" class="clientes">
+    <h2>Nossos Clientes</h2>
+    <p>
+      A Ambito Engenharia dispõe uma reputação inigualável por sua conduta ética,
+      compromisso ao orçamento, cronograma e satisfação do cliente.
+    </p>
+    <div class="cliente-logos">
+      <!-- Substitua as URLs pelas logos reais -->
+      <img src="https://via.placeholder.com/120x60?text=Cliente1" alt="Cliente 1">
+      <img src="https://via.placeholder.com/120x60?text=Cliente2" alt="Cliente 2">
+      <img src="https://via.placeholder.com/120x60?text=Cliente3" alt="Cliente 3">
+      <img src="https://via.placeholder.com/120x60?text=Cliente4" alt="Cliente 4">
+      <img src="https://via.placeholder.com/120x60?text=Cliente5" alt="Cliente 5">
+    </div>
+  </section>
+
+  <!-- DIVISOR (clientes -> stats) -->
+  <div class="divider">
+    <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
+      <path d="M0,0 C600,50 600,50 1200,0 L1200,50 L0,50 Z" fill="#000"></path>
+    </svg>
+  </div>
+
+  <!-- ===========================
+       ESTATÍSTICAS (Fundo preto)
+       =========================== -->
+  <section id="stats" class="stats">
+    <h2>Estatísticas</h2>
+    <div class="stats-container">
+      <div class="stat-item" data-target="25">
+        <span class="count">0</span>
+        <p>anos de experiência</p>
+      </div>
+      <div class="stat-item" data-target="170">
+        <span class="count">0</span>
+        <p>empreendimentos em todo território nacional</p>
+      </div>
+      <div class="stat-item" data-target="6">
+        <span class="count">0</span>
+        <p>milhões de m² de área construída</p>
+      </div>
+      <div class="stat-item" data-target="120">
+        <span class="count">0</span>
+        <p>clientes atendidos</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVISOR (stats -> obras) -->
+  <div class="divider">
+    <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
+      <path d="M0,0 C600,50 600,50 1200,0 L1200,50 L0,50 Z" fill="#fff"></path>
+    </svg>
+  </div>
+
+  <!-- ===========================
+       OBRAS (Fundo Branco, sem vídeo)
+       =========================== -->
+  <section id="obras" class="obras">
+    <h2>Últimas Obras</h2>
+    <p>
+      O longo histórico de serviços de engenharia e construção
+      confirma a história da empresa que prima pela excelência em suas relações
+      comerciais e execução de serviços.
+      <br><br>
+      <strong>+ de 170 obras em todo território nacional</strong>
+    </p>
+    <div class="obras-container">
+      <div class="obra-item">
+        <img src="https://via.placeholder.com/300x180?text=Obra+1" alt="Obra 1">
+        <div class="obra-info">
+          <h3>Obra 1</h3>
+          <p>Descrição breve do projeto realizado, destacando os pontos mais importantes.</p>
+        </div>
+      </div>
+      <div class="obra-item">
+        <img src="https://via.placeholder.com/300x180?text=Obra+2" alt="Obra 2">
+        <div class="obra-info">
+          <h3>Obra 2</h3>
+          <p>Descrição breve do projeto realizado, destacando os pontos mais importantes.</p>
+        </div>
+      </div>
+      <div class="obra-item">
+        <img src="https://via.placeholder.com/300x180?text=Obra+3" alt="Obra 3">
+        <div class="obra-info">
+          <h3>Obra 3</h3>
+          <p>Descrição breve do projeto realizado, destacando os pontos mais importantes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVISOR (obras -> iso) -->
+  <div class="divider">
+    <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
+      <path d="M0,0 C600,50 600,50 1200,0 L1200,50 L0,50 Z" fill="var(--verde-principal)"></path>
+    </svg>
+  </div>
+
+  <!-- ===========================
+       ISO (Fundo verde)
+       3º VÍDEO (à esquerda)
+       =========================== -->
+  <section id="iso" class="iso-section reverse">
+    <div class="section-container">
+      <div class="section-video">
+        <video autoplay muted loop>
+          <source src="video3.mp4" type="video/mp4">
+          Seu navegador não suporta o vídeo HTML5.
+        </video>
+      </div>
+      <div class="section-text">
+        <h2>ISO</h2>
+        <p>
+          Inovação e responsabilidade ambiental caminham juntas para garantir o sucesso
+          do seu negócio e o cuidado com o meio ambiente. A Ambito Engenharia segue
+          os mais rigorosos padrões de qualidade e segurança.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVISOR (iso -> compliance) -->
+  <div class="divider">
+    <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
+      <path d="M0,0 C600,50 600,50 1200,0 L1200,50 L0,50 Z" fill="#333"></path>
+    </svg>
+  </div>
+
+  <!-- ===========================
+       COMPLIANCE (Fundo #333)
+       4º VÍDEO (à direita, sem autoplay)
+       =========================== -->
+  <section id="compliance" class="compliance-section">
+    <div class="section-container">
+      <div class="section-text">
+        <h2>Compliance</h2>
+        <p>
+          A Ambito Engenharia preza pela ética, transparência e cumprimento de todas as normas
+          legais. Nosso canal de compliance e ética está disponível para funcionários,
+          clientes e fornecedores. Garantimos que todos os processos sejam conduzidos
+          com integridade e respeito.
+        </p>
+        <p><strong>Canal de Ética:</strong> <a href="#" style="color: var(--verde-principal);">Acesse aqui</a></p>
+        <p><em>Este vídeo só inicia ao clicar:</em></p>
+      </div>
+      <div class="section-video">
+        <video controls poster="https://via.placeholder.com/500x300?text=Clique+para+Assistir">
+          <source src="video4.mp4" type="video/mp4">
+          Seu navegador não suporta o vídeo HTML5.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVISOR (compliance -> footer) -->
+  <div class="divider">
+    <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
+      <path d="M0,0 C600,50 600,50 1200,0 L1200,50 L0,50 Z" fill="#000"></path>
+    </svg>
+  </div>
+
+  <!-- ===========================
+       RODAPÉ (FUNDO PRETO)
+       =========================== -->
+  <footer>
+    <div class="footer-logos">
+      <img src="Engenharia.png" alt="Ambito Engenharia">
+      <img src="https://via.placeholder.com/120x60?text=3TC" alt="3TC">
+      <img src="https://via.placeholder.com/120x60?text=SNR" alt="SNR">
+    </div>
+    <p>© 2025 Ambito Engenharia - Todos os direitos reservados.</p>
+    <p>Contato: (xx) xxxx-xxxx | E-mail: contato@ambitoengenharia.com.br</p>
+  </footer>
+
+  <!-- BOTÃO "VOLTAR AO TOPO" -->
+  <button id="backToTop" title="Voltar ao Topo">
+    &#8679;
+  </button>
+
+  <script>
+    // Função para rolar suavemente até a seção desejada
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Mostrar/esconder o botão "Voltar ao Topo"
+    window.addEventListener('scroll', function() {
+      const btn = document.getElementById('backToTop');
+      if (window.pageYOffset > 300) {
+        btn.style.display = 'block';
+      } else {
+        btn.style.display = 'none';
+      }
+    });
+
+    // Ação do botão "Voltar ao Topo"
+    document.getElementById('backToTop').addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ===========================
+    // ANIMAÇÃO DE CONTAGEM (ESTATÍSTICAS)
+    // ===========================
+    const statSection = document.getElementById('stats');
+    const statItems = document.querySelectorAll('.stat-item .count');
+    let statsStarted = false;
+
+    function animateCountUp(el, target) {
+      let current = 0;
+      // Ajuste o incremento conforme seu gosto
+      const increment = target < 50 ? 1 : Math.floor(target / 50);
+      const timer = setInterval(() => {
+        current += increment;
+        el.textContent = current;
+        if (current >= target) {
+          el.textContent = target;
+          clearInterval(timer);
+        }
+      }, 50);
+    }
+
+    // Observa quando a seção de stats entra na tela
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !statsStarted) {
+          statsStarted = true;
+          statItems.forEach(item => {
+            const target = parseInt(item.parentElement.getAttribute('data-target'));
+            animateCountUp(item, target);
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(statSection);
+
+    console.log("Página carregada com layout zig-zag, seção de clientes, e tudo em verde!");
+  </script>
+</body>
+</html>
