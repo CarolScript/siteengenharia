@@ -186,7 +186,6 @@
 
     /* ===========================
        EMPRESA (fundo branco)
-       1º VÍDEO (esquerda)
        =========================== */
     .empresa {
       background-color: var(--branco);
@@ -195,7 +194,6 @@
 
     /* ===========================
        TECNOLOGIA (fundo #222)
-       2º VÍDEO (direita)
        =========================== */
     .tecnologia {
       background-color: var(--cinza-escuro);
@@ -204,7 +202,6 @@
 
     /* ===========================
        CLIENTES (fundo branco)
-       SEM VÍDEO, estilo da imagem
        =========================== */
     .clientes {
       background-color: var(--branco);
@@ -242,7 +239,6 @@
 
     /* ===========================
        ESTATÍSTICAS (fundo preto)
-       SEM VÍDEO, contagem
        =========================== */
     .stats {
       background-color: var(--preto);
@@ -292,7 +288,6 @@
 
     /* ===========================
        OBRAS (fundo branco)
-       SEM VÍDEO
        =========================== */
     .obras {
       background-color: var(--branco);
@@ -349,7 +344,6 @@
 
     /* ===========================
        ISO (fundo verde)
-       3º VÍDEO (esquerda)
        =========================== */
     .iso-section {
       background-color: var(--verde-principal);
@@ -358,7 +352,6 @@
 
     /* ===========================
        COMPLIANCE (fundo #333)
-       4º VÍDEO (direita)
        =========================== */
     .compliance-section {
       background-color: #333;
@@ -366,7 +359,7 @@
     }
 
     /* ===========================
-       RODAPÉ (fundo preto)
+       RODAPÉ (FUNDO PRETO)
        =========================== */
     footer {
       width: 100%;
@@ -421,21 +414,59 @@
     }
 
     /* ===========================
-       RESPONSIVO
+       RESPONSIVO EXTRA (max-width: 768px)
+       Para celular
        =========================== */
     @media (max-width: 768px) {
+      /* Ajuste banner */
       .banner {
-        height: 200px;
+        height: auto;
+        padding: 40px 5%;
+        text-align: center;
       }
       .banner h1 {
         font-size: 1.5em;
       }
+      .banner p {
+        font-size: 1em;
+      }
+
+      /* Menu em coluna */
+      header nav ul {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      /* Seções com vídeo empilham texto e vídeo */
       .section-container {
+        flex-direction: column;
         padding: 20px;
+      }
+      .section-video, .section-text {
+        width: 100%;
+      }
+
+      /* Stats, clientes, obras em coluna */
+      .stats-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .cliente-logos {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .obras-container {
+        flex-direction: column;
       }
       .obra-item {
         width: 100%;
         max-width: 400px;
+      }
+
+      /* Rodapé logos empilhadas */
+      .footer-logos {
+        flex-direction: column;
+        gap: 15px;
       }
     }
   </style>
@@ -487,11 +518,10 @@
   </div>
 
   <!-- ===========================
-       EMPRESA (1º VÍDEO À ESQUERDA)
+       EMPRESA (1º VÍDEO)
        =========================== -->
   <section id="empresa" class="empresa reverse">
     <div class="section-container">
-      <!-- Vídeo à esquerda, texto à direita -->
       <div class="section-video">
         <video autoplay muted loop>
           <source src="video1.mp4" type="video/mp4">
@@ -517,7 +547,7 @@
   </div>
 
   <!-- ===========================
-       TECNOLOGIA (2º VÍDEO À DIREITA)
+       TECNOLOGIA (2º VÍDEO)
        =========================== -->
   <section id="tecnologia" class="tecnologia">
     <div class="section-container">
@@ -546,7 +576,7 @@
   </div>
 
   <!-- ===========================
-       CLIENTES (Fundo Branco, sem vídeo)
+       CLIENTES (Fundo Branco)
        =========================== -->
   <section id="clientes" class="clientes">
     <h2>Nossos Clientes</h2>
@@ -555,7 +585,6 @@
       compromisso ao orçamento, cronograma e satisfação do cliente.
     </p>
     <div class="cliente-logos">
-      <!-- Substitua as URLs pelas logos reais -->
       <img src="https://via.placeholder.com/120x60?text=Cliente1" alt="Cliente 1">
       <img src="https://via.placeholder.com/120x60?text=Cliente2" alt="Cliente 2">
       <img src="https://via.placeholder.com/120x60?text=Cliente3" alt="Cliente 3">
@@ -604,7 +633,7 @@
   </div>
 
   <!-- ===========================
-       OBRAS (Fundo Branco, sem vídeo)
+       OBRAS (Fundo Branco)
        =========================== -->
   <section id="obras" class="obras">
     <h2>Últimas Obras</h2>
@@ -648,8 +677,7 @@
   </div>
 
   <!-- ===========================
-       ISO (Fundo verde)
-       3º VÍDEO (à esquerda)
+       ISO (Fundo verde, 3º VÍDEO)
        =========================== -->
   <section id="iso" class="iso-section reverse">
     <div class="section-container">
@@ -678,8 +706,7 @@
   </div>
 
   <!-- ===========================
-       COMPLIANCE (Fundo #333)
-       4º VÍDEO (à direita, sem autoplay)
+       COMPLIANCE (Fundo #333, 4º VÍDEO sem autoplay)
        =========================== -->
   <section id="compliance" class="compliance-section">
     <div class="section-container">
@@ -785,7 +812,7 @@
 
     observer.observe(statSection);
 
-    console.log("Página carregada com layout zig-zag, seção de clientes, e tudo em verde!");
+    console.log("Página carregada com layout zig-zag, seção de clientes, e responsividade para celular!");
   </script>
 </body>
 </html>
